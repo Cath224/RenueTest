@@ -107,6 +107,9 @@ public class Airport {
     private static List<ResultLine> getLinesFromFile(List<Integer> indexes,
                                                  List<FilterNode> filterNodes,
                                                  String filter) throws IOException {
+        if (indexes == null || indexes.isEmpty()){
+            return new ArrayList<>();
+        }
         List<ResultLine> resultToPrint = new ArrayList<>();
         try (BufferedReader reader
                      = new BufferedReader(new InputStreamReader(Airport.class.getClassLoader().getResourceAsStream(FILENAME)))) {
@@ -118,7 +121,7 @@ public class Airport {
 
             String currLine;
 
-            while ((currLine = reader.readLine()) != null) {
+            while ((currLine = reader.readLine()) != null && index <= lastIndex) {
                 String[] comparison = currLine.split(",");
                 List<Boolean> expressionResultList = calculateFilterExpressionForCurrentLine(comparison, filterNodes);
                 String logicString = buildFilterLogicString(filter, expressionResultList);
