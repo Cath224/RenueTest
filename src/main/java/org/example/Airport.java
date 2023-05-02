@@ -114,7 +114,7 @@ public class Airport {
             int index = 0;
             int indexAutocomplete = 0;
             Integer currIndex = indexes.get(indexAutocomplete);
-            int lastIndex = indexes.size() - 1;
+            int lastIndex = indexes.get(indexes.size() - 1);
 
             String currLine;
 
@@ -133,7 +133,7 @@ public class Airport {
                 if (index == currIndex && filterResult) {
                     resultToPrint.add(new ResultLine(comparison[1], currLine));
                 }
-                if (index >= indexAutocomplete && indexAutocomplete < lastIndex) {
+                if (index >= currIndex && currIndex < lastIndex) {
                     indexAutocomplete++;
                     currIndex = indexes.get(indexAutocomplete);
                 }
@@ -260,9 +260,6 @@ public class Airport {
             int index = 0;
             while ((currLine = reader.readLine()) != null) {
                 String nameLine = currLine.split(",")[1].replace("\"", "").toLowerCase();
-                if (index == 43) {
-                    int a = 3;
-                }
                 nameHolder.put(index, nameLine);
                 index++;
             }
